@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  mensaje: string | undefined;
   constructor() { }
 
   ngOnInit(): void {
+    this.mensaje = "Sin Nombre...";
   }
 
   // Forma vieja
@@ -21,6 +23,11 @@ export class MainPageComponent implements OnInit {
 
   agregar( ){
     console.log("Esto es una prueba");
+  }
+
+  recibeMensaje = (mensaje: string) => {
+    console.log("Mensaje recibido");
+    this.mensaje = mensaje;
   }
 
 }

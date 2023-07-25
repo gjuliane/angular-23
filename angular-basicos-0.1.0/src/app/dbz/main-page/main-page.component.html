@@ -20,3 +20,7 @@
     </form>
   </div>
 </div>
+<div class="row">
+  <div class="col"><child-component (onEnviaMensaje)="recibeMensaje($event)"></child-component></div>
+  <div class="col" [ngStyle]="{'margin-top':'20px'}">{{mensaje}}</div>
+</div>

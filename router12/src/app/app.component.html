@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <h1 class="title">Angular Router</h1>
+  <nav>
+    <a routerLink="/crisis-center" routerLinkActive="active" ariaCurrentWhenActive="page">Crisis Center</a>
+    <!-- <a routerLink="/superheroes" routerLinkActive="active" ariaCurrentWhenActive="page">Heroes</a> -->
+    <a [routerLink]="['superheroes']">Heroes</a>
+    <a [routerLink]="[{ outlets: { detalles: ['otralista'] } }]">Otra Lista</a>
+    <a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page">Admin</a>
+    <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+    <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+  </nav>
+  <div style="background-color: lightpink;">
+    <router-outlet></router-outlet>
+  </div>
+  <div style="background-color: cadetblue;">
+    <router-outlet name="popup"></router-outlet>
+  </div>
+  <div style="background-color: rgb(227, 233, 141);">
+    <router-outlet name="detalles"></router-outlet>
+  </div>
+</div>
