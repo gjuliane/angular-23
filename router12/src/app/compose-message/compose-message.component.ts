@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-compose-message',
   templateUrl: './compose-message.component.html',
   styleUrls: ['./compose-message.component.css']
 })
-export class ComposeMessageComponent {
+export class ComposeMessageComponent implements OnInit {
   details = '';
   message = '';
   sending = false;
 
-  constructor(private router: Router) {}
+  url = 'http://localhost:61614/';
+  constructor(
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private routerOutlet: RouterOutlet
+  ) {}
 
+  ngOnInit() {
+    console.log("routerOutlet:", this.routerOutlet);
+  }
+  
+  sanitizeURL(){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
   send() {
     this.sending = true;
     this.details = 'Sending Message...';

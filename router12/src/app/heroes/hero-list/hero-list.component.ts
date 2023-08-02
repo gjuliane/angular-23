@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Event, Router, RouterOutlet, RoutesRecognized } from '@angular/router';
 
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
@@ -18,7 +18,9 @@ export class HeroListComponent implements OnInit {
 
   constructor(
     private service: HeroService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private routerOutlet: RouterOutlet
   ) {}
 
   ngOnInit() {
@@ -28,5 +30,17 @@ export class HeroListComponent implements OnInit {
         return this.service.getHeroes();
       })
     );
+    // this.router.events.subscribe((event: Event) => {
+    //   console.log("HeroListComponent", event); //based on this change class
+    // });
+
+    console.log("routerOutlet:",this.routerOutlet);
+    
+    // this.routerOutlet.activatedRoute activat.subscribe((outletName: string) => {
+    //   console.log('The current outlet is:', outletName);
+    // });
+      
   }
+
+
 }
