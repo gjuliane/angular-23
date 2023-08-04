@@ -7,12 +7,14 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroListDosComponent } from './hero-list-dos/hero-list-dos.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HeroesRoutingModule
+    // HeroesRoutingModule
+    RouterModule
   ],
   declarations: [
     HeroListComponent,

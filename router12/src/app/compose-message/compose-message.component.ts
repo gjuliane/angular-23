@@ -20,7 +20,8 @@ export class ComposeMessageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("routerOutlet:", this.routerOutlet);
+    // console.log("routerOutlet:", this.routerOutlet);
+    console.log("routerOutlet:",this.routerOutlet.activatedRoute.outlet);
   }
   
   sanitizeURL(){

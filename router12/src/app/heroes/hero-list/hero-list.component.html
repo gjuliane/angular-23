@@ -1,13 +1,11 @@
-<h2>Heroes</h2>
+<h2>Heroes</h2>{{currentOutlet}}
 <ul class="heroes">
   <li *ngFor="let hero of heroes$ | async" [class.selected]="hero.id === selectedId">
-    <!-- <a [routerLink]="['/hero', hero.id]">
+    <!-- <a [routerLink]="getRoute(hero)">
       <span class="badge">{{ hero.id }}</span>{{ hero.name }}
     </a> -->
-    <a [routerLink]="['/superhero', hero.id]">
-      <span class="badge">{{ hero.id }}</span>{{ hero.name }}
-    </a>
     <!-- <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a> -->
+    <a (click)="goEditHero(hero)"><span class="badge">{{ hero.id }}</span>{{ hero.name }}</a>
   </li>
 </ul>
 

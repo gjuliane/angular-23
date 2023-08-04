@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Event, Router, RouterOutlet, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, Event, Router, RouterLink, RouterOutlet, RoutesRecognized } from '@angular/router';
 
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
@@ -15,6 +15,8 @@ import { Hero } from '../hero';
 export class HeroListComponent implements OnInit {
   heroes$!: Observable<Hero[]>;
   selectedId = 0;
+
+  currentOutlet = 'primary';
 
   constructor(
     private service: HeroService,
@@ -34,7 +36,8 @@ export class HeroListComponent implements OnInit {
     //   console.log("HeroListComponent", event); //based on this change class
     // });
 
-    console.log("routerOutlet:",this.routerOutlet);
+    console.log("routerOutlet:",this.routerOutlet.activatedRoute.outlet);
+    this.currentOutlet = this.routerOutlet.activatedRoute.outlet;
     
     // this.routerOutlet.activatedRoute activat.subscribe((outletName: string) => {
     //   console.log('The current outlet is:', outletName);
@@ -42,5 +45,23 @@ export class HeroListComponent implements OnInit {
       
   }
 
+  getRoute = (hero: Hero) => {
+    if (this.currentOutlet == 'primary') {
+      return ['/liga','superhero', hero.id]
+    } else {
+      return [{ outlets: { [this.currentOutlet]: ['liga','superhero', hero.id] } }]
+    }
+  }
+
+  // generateRouterLinkToSecondaryOutlet(routePath: string) {
+  //   return RouterLink.create({
+  //     path: routePath,
+  //     outlet: 'secondary',
+  //   });
+  // }
+
+  goEditHero = (hero: Hero) => {
+    this.router.navigate([{ outlets: { [this.currentOutlet]: ['liga', 'superhero', hero.id] } }], {replaceUrl: true});
+  }
 
 }
