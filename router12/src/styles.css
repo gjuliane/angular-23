@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    /* background-color: #f1f1f1; */
+}
+.outlet-container{
+    /* height: fit-content; */
+    overflow: scroll;
+}
+.canvas{
+    width: fit-content;
+    height: fit-content;
+}
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .canvas{
+        width: 1200px;
+    }
+}

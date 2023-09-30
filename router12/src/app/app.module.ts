@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
 import { HeroesModule } from './heroes/heroes.module';
 import { PruebasModule } from './pruebas/pruebas.module';
+import { AngularSplitModule } from 'angular-split';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PruebasModule } from './pruebas/pruebas.module';
     AppRoutingModule,
     FormsModule,
     HeroesModule,
-    PruebasModule
+    PruebasModule,
+    AngularSplitModule
   ],
   providers: [],
   bootstrap: [AppComponent]

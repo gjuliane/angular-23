@@ -15,28 +15,64 @@
     <a [routerLink]="[{ outlets: { popup: ['pruebas','uno'] }}]">Prueba Uno popup</a>
     <a [routerLink]="[{ outlets: { detalles: ['pruebas','uno'] }}]">Prueba Uno detalles</a>
   </nav>
-  <div style="background-color: rgb(250, 226, 230);">
-    <i>primary outlet</i>
-    <router-outlet
-    (activate)='onActivate($event)'
-    (deactivate)='onDeactivate($event)'
-    (attach)='onAttach($event)'
-    (detach)='onDetach($event)'></router-outlet>
+
+  <div style="width: 99vw; height: 80vh; background: lightseagreen;">
+    <as-split direction="vertical" [restrictMove]="true" [useTransition]="true">
+      <as-split-area [size]="50" [visible]="outlet1Split1" [order]="1">
+        <as-split direction="horizontal" [restrictMove]="true" [useTransition]="true">
+          <as-split-area [size]="40" [visible]="outlet1cuad1" [order]="2">
+            <button (click)="maximize('outlet1', 1)">max</button>
+            <button (click)="minimize('outlet1')">min</button>
+            <div class="outlet-container" style="background-color: rgb(250, 226, 230);">
+              <i>primary outlet</i>
+              <div class="canvas">
+                <router-outlet
+                (activate)='onActivate($event)'
+                (deactivate)='onDeactivate($event)'
+                (attach)='onAttach($event)'
+                (detach)='onDetach($event)'></router-outlet>
+              </div>
+            </div>
+          </as-split-area>
+          <as-split-area [size]="60" [visible]="outlet1cuad2" [order]="3">
+            <button (click)="maximize('outlet1', 2)">max</button>
+            <button (click)="minimize('outlet1')">min</button>
+            <div style="background-color: rgb(238, 254, 255);">
+              <i> popup outlet</i>
+               <router-outlet name="popup"
+               (activate)='onActivatePopUp($event)'
+               (deactivate)='onDeactivatePopUp($event)'
+               (attach)='onAttachPopUp($event)'
+               (detach)='onDetachPopUp($event)'></router-outlet>
+             </div>
+          </as-split-area>
+        </as-split>
+      </as-split-area>
+      <as-split-area [size]="50" [visible]="outlet1Split2" [order]="4">
+        <as-split direction="horizontal" [restrictMove]="true" [useTransition]="true">
+          <as-split-area [size]="60" [visible]="outlet1cuad3" [order]="5">
+            <button (click)="maximize('outlet1', 3)">max</button>
+            <button (click)="minimize('outlet1')">min</button>
+            <div style="background-color: rgb(245, 247, 218);">
+              <i>detalles outlet</i>
+              <router-outlet name="detalles"
+              (activate)='onActivateDetails($event)'
+              (deactivate)='onDeactivateDetails($event)'
+              (attach)='onAttachDetails($event)'
+              (detach)='onDetachDetails($event)'></router-outlet>
+            </div>
+          </as-split-area>
+          <as-split-area [size]="40" [visible]="outlet1cuad4" [order]="6">
+            <button (click)="maximize('outlet1', 4)">max</button>
+            <button (click)="minimize('outlet1')">min</button>
+            <p>B 2</p>
+          </as-split-area>
+        </as-split>
+      </as-split-area>
+    </as-split>
   </div>
-  <div style="background-color: rgb(238, 254, 255);">
-   <i> popup outlet</i>
-    <router-outlet name="popup"
-    (activate)='onActivatePopUp($event)'
-    (deactivate)='onDeactivatePopUp($event)'
-    (attach)='onAttachPopUp($event)'
-    (detach)='onDetachPopUp($event)'></router-outlet>
-  </div>
-  <div style="background-color: rgb(245, 247, 218);">
-    <i>detalles outlet</i>
-    <router-outlet name="detalles"
-    (activate)='onActivateDetails($event)'
-    (deactivate)='onDeactivateDetails($event)'
-    (attach)='onAttachDetails($event)'
-    (detach)='onDetachDetails($event)'></router-outlet>
-  </div>
+
+
+
+
 </div>

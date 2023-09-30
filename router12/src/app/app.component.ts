@@ -13,6 +13,73 @@ export class AppComponent {
 
   title = 'router12';
 
+  outlet1cuad1 = true;
+  outlet1cuad2 = true;
+  outlet1cuad3 = true;
+  outlet1cuad4 = true;
+  outlet1Split1 = true;
+  outlet1Split2 = true;
+
+  cuadrante2a = true;
+  cuadrante2b = true;
+  cuadrante3c = true;
+  cuadrante3d = true;
+  cuadranteDiv = true;
+  
+  maximize(outlet:string, cuadrante: number) {
+    switch (outlet) {
+      case 'outlet1':
+        switch (cuadrante) {
+          case 1:
+            this.outlet1cuad1 = true;
+            this.outlet1cuad2 = false;
+            this.outlet1cuad3 = false;
+            this.outlet1cuad4 = false;
+            this.outlet1Split1 = true;
+            this.outlet1Split2 = false;
+            break;
+          case 2:
+            this.outlet1cuad1 = false;
+            this.outlet1cuad2 = true;
+            this.outlet1cuad3 = false;
+            this.outlet1cuad4 = false;
+            this.outlet1Split1 = true;
+            this.outlet1Split2 = false;
+            break;
+          case 3:
+            this.outlet1cuad1 = false;
+            this.outlet1cuad2 = false;
+            this.outlet1cuad3 = true;
+            this.outlet1cuad4 = false;
+            this.outlet1Split1 = false;
+            this.outlet1Split2 = true;
+            break;
+          case 4:
+            this.outlet1cuad1 = false;
+            this.outlet1cuad2 = false;
+            this.outlet1cuad3 = false;
+            this.outlet1cuad4 = true;
+            this.outlet1Split1 = false;
+            this.outlet1Split2 = true;
+            break;
+        }
+        break;
+    }
+  }
+
+  minimize(outlet:string) {
+    switch (outlet) {
+      case 'outlet1':
+        this.outlet1cuad1 = true;
+        this.outlet1cuad2 = true;
+        this.outlet1cuad3 = true;
+        this.outlet1cuad4 = true;
+        this.outlet1Split1 = true;
+        this.outlet1Split2 = true;
+        break;
+    }
+  }
+
   constructor(private contexts: ChildrenOutletContexts) {}
 
   getRouteAnimationData() {
