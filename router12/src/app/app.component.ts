@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from './animations';
+import { IOutputData } from 'angular-split';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { slideInAnimation } from './animations';
   styleUrls: ['./app.component.css'],
   animations: [ slideInAnimation ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
 
   title = 'router12';
 
@@ -25,7 +26,23 @@ export class AppComponent {
   cuadrante3c = true;
   cuadrante3d = true;
   cuadranteDiv = true;
+
+  @ViewChild("area1") area1ref!:ElementRef;
+  buttonContainer!: HTMLElement;
   
+  constructor(
+    private contexts: ChildrenOutletContexts,
+    private renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.buttonContainer = this.area1ref.nativeElement.querySelector('.button-container');
+  }
+
+  ngOnInit(): void {
+
+  }
+
   maximize(outlet:string, cuadrante: number) {
     switch (outlet) {
       case 'outlet1':
@@ -80,7 +97,7 @@ export class AppComponent {
     }
   }
 
-  constructor(private contexts: ChildrenOutletContexts) {}
+
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
@@ -134,5 +151,29 @@ export class AppComponent {
   }
   onActivateDetails($event: any) {
     console.log("onActivateDetails", $event);
+  }
+
+  doSomethingOnScroll = (e: any) => {
+    // console.log(e);
+    // console.log(container);
+    if (e.target.scrollLeft) {
+      // console.log("scrollLeft",e.target.scrollLeft);
+      this.renderer.setStyle(this.buttonContainer, "min-width", (e.target.offsetWidth + e.target.scrollLeft -21)+'px')
+    }
+  }
+
+  dragEnd = (e:any) => {
+    console.log(e);
+    console.log("dragEnd");
+    console.log(this.area1ref.nativeElement.querySelector('.button-container').offsetWidth);
+    this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.querySelector('.button-container').offsetWidth)+'px')
+  }
+
+  transitionEnd = (e:any) => {
+    console.log(e);
+    console.log("transitionEnd");
+  }
+  areaVisible=()=>{
+
   }
 }
