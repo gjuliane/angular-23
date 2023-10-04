@@ -27,6 +27,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   cuadrante3d = true;
   cuadranteDiv = true;
 
+  outlet1ScrollArea1:number = 0;
+
   @ViewChild("area1") area1ref!:ElementRef;
   buttonContainer!: HTMLElement;
   
@@ -93,6 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.outlet1cuad4 = true;
         this.outlet1Split1 = true;
         this.outlet1Split2 = true;
+        this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.offsetWidth+this.outlet1ScrollArea1-10)+'px')
         break;
     }
   }
@@ -157,22 +160,34 @@ export class AppComponent implements OnInit, AfterViewInit {
     // console.log(e);
     // console.log(container);
     if (e.target.scrollLeft) {
+      console.log("scrollEnd");
       // console.log("scrollLeft",e.target.scrollLeft);
-      this.renderer.setStyle(this.buttonContainer, "min-width", (e.target.offsetWidth + e.target.scrollLeft -21)+'px')
+      this.outlet1ScrollArea1 = e.target.scrollLeft;
+      console.log("outlet1ScrollArea1", this.outlet1ScrollArea1);
+      
+      // this.renderer.setStyle(this.buttonContainer, "min-width", (e.target.offsetWidth + e.target.scrollLeft -10)+'px')
+      this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.offsetWidth+this.outlet1ScrollArea1-10)+'px')
     }
   }
 
   dragEnd = (e:any) => {
     console.log(e);
     console.log("dragEnd");
+    console.log(this.area1ref.nativeElement.querySelector('.button-container'));
     console.log(this.area1ref.nativeElement.querySelector('.button-container').offsetWidth);
-    this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.querySelector('.button-container').offsetWidth)+'px')
+    console.log("area1Width",this.area1ref.nativeElement.offsetWidth);
+    
+    // this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.querySelector('.button-container').offsetWidth)+'px')
+    // this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.querySelector('.button-container').offsetWidth+this.outlet1ScrollArea1)+'px')
+    this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.offsetWidth+this.outlet1ScrollArea1-10)+'px')
   }
 
   transitionEnd = (e:any) => {
     console.log(e);
     console.log("transitionEnd");
+    this.renderer.setStyle(this.buttonContainer, "min-width", (this.area1ref.nativeElement.offsetWidth+this.outlet1ScrollArea1-10)+'px')
   }
+
   areaVisible=()=>{
 
   }
